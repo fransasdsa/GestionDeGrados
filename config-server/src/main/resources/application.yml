@@ -1,0 +1,26 @@
+# application.yml
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/fransasdsa/GestionDeGrados.git
+          searchPaths: config-repo
+          default-label: main
+          # Si el repositorio es privado, añade las credenciales
+          # username: tu-usuario
+          # password: tu-contraseña
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
