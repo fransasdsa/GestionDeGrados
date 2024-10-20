@@ -22,16 +22,17 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable())  // Deshabilitar CSRF
                 .authorizeExchange(exchanges -> exchanges
+                        // Protecciones por roles
                         .pathMatchers(HttpMethod.POST, "/api/v1/users").hasRole("ADMINISTRADOR")
                         .pathMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMINISTRADOR")
                         .pathMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMINISTRADOR")
                         .pathMatchers("/api/v1/users/**").authenticated()
-                        .anyExchange().permitAll()
+                        .anyExchange().permitAll()  // Cualquier otra ruta está permitida sin autenticación
                 )
-                .authenticationManager(authenticationManager)
-                .securityContextRepository(securityContextRepository)
+                .authenticationManager(authenticationManager)  // Autenticación JWT
+                .securityContextRepository(securityContextRepository)  // Configuración del contexto JWT
                 .build();
     }
 

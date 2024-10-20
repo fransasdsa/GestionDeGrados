@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchanges -> exchanges
                         // Excepciones para Swagger
                         .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        // Protecciones por roles
                         .pathMatchers(HttpMethod.POST, "/api/v1/students").hasRole("ESTUDIANTE")
                         .pathMatchers("/api/v1/students/**").authenticated()
                         .anyExchange().permitAll()

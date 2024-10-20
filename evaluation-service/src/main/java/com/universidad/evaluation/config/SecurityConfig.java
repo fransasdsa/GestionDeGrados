@@ -24,6 +24,9 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeExchange(exchanges -> exchanges
+                        // Excepciones para Swagger
+                        .pathMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        // Protecciones por roles
                         .pathMatchers(HttpMethod.POST, "/api/v1/evaluations").hasRole("EVALUADOR")
                         .pathMatchers(HttpMethod.PUT, "/api/v1/evaluations/**").hasAnyRole("EVALUADOR", "COORDINADOR", "ADMINISTRADOR")
                         .pathMatchers(HttpMethod.DELETE, "/api/v1/evaluations/**").hasAnyRole("EVALUADOR", "COORDINADOR", "ADMINISTRADOR")

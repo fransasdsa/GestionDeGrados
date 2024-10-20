@@ -21,12 +21,16 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
-                .csrf().disable()
+                .csrf(csrf -> csrf.disable())
                 .authorizeExchange(exchanges -> exchanges
+                        // Excluir rutas de Swagger
+                        .pathMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**").permitAll()
+                        // Rutas protegidas por roles
                         .pathMatchers(HttpMethod.POST, "/api/v1/projects").hasRole("ESTUDIANTE")
                         .pathMatchers(HttpMethod.PUT, "/api/v1/projects/**").hasAnyRole("ESTUDIANTE", "ASESOR", "COORDINADOR", "ADMINISTRADOR")
                         .pathMatchers(HttpMethod.GET, "/api/v1/projects/**").hasAnyRole("ESTUDIANTE", "ASESOR", "EVALUADOR", "COORDINADOR", "ADMINISTRADOR")
                         .pathMatchers(HttpMethod.DELETE, "/api/v1/projects/**").hasAnyRole("COORDINADOR", "ADMINISTRADOR")
+                        // Todas las demás rutas requieren autenticación
                         .anyExchange().authenticated()
                 )
                 .authenticationManager(authenticationManager)
