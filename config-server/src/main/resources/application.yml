@@ -15,7 +15,10 @@ spring:
           # Si el repositorio es privado, añade las credenciales
           # username: tu-usuario
           # password: tu-contraseña
-
+  security:
+    user:
+      name: root
+      password: 123456
 eureka:
   client:
     service-url:
