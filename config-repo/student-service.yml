@@ -2,3 +2,9 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/studentdb
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html

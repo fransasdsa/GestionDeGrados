@@ -2,6 +2,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/advisordb
+
 jwt:
   secret: "your-secure-key-with-at-least-32-characters" # Debe coincidir con la del servicio de autenticación
   expiration: 86400000 # 1 día en milisegundos
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
