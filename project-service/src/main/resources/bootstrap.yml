@@ -9,6 +9,9 @@ spring:
         enabled: true
       fail-fast: true
 
+jwt:
+  secret: "your-secure-key-with-at-least-32-characters"
+  expiration: 86400000 # 1 día en milisegundos
 eureka:
   client:
     service-url:
