@@ -11,3 +11,12 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /doc/swagger-ui.html
+jwt:
+  secret: "your-secure-key-with-at-least-32-characters"
+  expiration: 86400000 # 1 día en milisegundos
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true

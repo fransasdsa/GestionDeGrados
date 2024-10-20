@@ -1,0 +1,11 @@
+# bootstrap.yml
+
+spring:
+  application:
+    name: project-service
+  profiles:
+    active: development
+  config:
+    import: optional:configserver:http://root:123456@localhost:8888
+
+
